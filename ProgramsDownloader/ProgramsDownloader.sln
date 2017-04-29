@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgramsDownloader", "ProgramsDownloader\ProgramsDownloader.csproj", "{DF2BC45B-6C65-448D-BCAF-91815E893099}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MD5Checker", "..\MD5Checker\MD5Checker\MD5Checker.csproj", "{A9F7D55B-979B-4EFB-8ED5-34092616DD78}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DF2BC45B-6C65-448D-BCAF-91815E893099}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF2BC45B-6C65-448D-BCAF-91815E893099}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF2BC45B-6C65-448D-BCAF-91815E893099}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF2BC45B-6C65-448D-BCAF-91815E893099}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9F7D55B-979B-4EFB-8ED5-34092616DD78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9F7D55B-979B-4EFB-8ED5-34092616DD78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9F7D55B-979B-4EFB-8ED5-34092616DD78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9F7D55B-979B-4EFB-8ED5-34092616DD78}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
