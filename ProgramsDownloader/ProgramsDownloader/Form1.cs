@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace ProgramsDownloader
 {
@@ -18,18 +18,21 @@ namespace ProgramsDownloader
         
         //Initialize
         public Form1()
-        {
+        { 
             InitializeComponent();
-            getSize(6);
         }
 
         //Methods
+        private void onNewClick(object sender, EventArgs args)
+        {
+            alalalal();
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             try
             {
                 HttpWebResponse res = (HttpWebResponse)HttpWebRequest.Create("http://sumjest.ru/programsinfo/programs.txt").GetResponse();
-                WebHeaderCollection header = res.Headers;
                 var encoding = ASCIIEncoding.ASCII;
                 using (var reader = new StreamReader(res.GetResponseStream(), encoding))
                 {
@@ -37,6 +40,13 @@ namespace ProgramsDownloader
                     {
                         string line = reader.ReadLine();
                         string[] linea = line.Split(';');
+                        
+                        if (line.Split(';')[0].Contains("ProgramsDownloader"))
+                        {
+                            Version v;
+                            if (Version.TryParse(line.Split(';')[1], out v)) { if (v.CompareTo(Version.Parse(Application.ProductVersion)) > 0) { linea[1] += " - Новая версия!"; menuStrip1.Items.Add("Вышла новая версия программы!", null, onNewClick); } }
+
+                        }
                         comboBox1.Items.Add(linea[0] + " " + linea[1]);
                         urls.Add(line);
                     }
@@ -160,6 +170,7 @@ namespace ProgramsDownloader
                 if (result == DialogResult.OK)
                 {
                     download(urls.ToArray()[comboBox1.SelectedIndex].Split(';')[2], sfd.FileName);
+                    System.Diagnostics.Process.Start("explorer.exe", /*Path.GetDirectoryName(sfd.FileName) + */"/select, " + sfd.FileName);
                 }
 
             }
@@ -172,6 +183,24 @@ namespace ProgramsDownloader
         private void infoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new AboutForm().ShowDialog();
+        }
+        private void alalalal()
+        {
+            HttpWebRequest proxy_request = (HttpWebRequest)WebRequest.Create("http://sumjest.ru/index/programs_downloader/0-6");
+            proxy_request.Method = "GET";
+            proxy_request.Timeout = 20000;
+            HttpWebResponse resp = proxy_request.GetResponse() as HttpWebResponse;
+            string html = "";
+            using (StreamReader sr = new StreamReader(resp.GetResponseStream(), Encoding.UTF8))
+                html = sr.ReadToEnd();
+            string a = Regex.Match(html, @"<!--Dangerous--><p>Change log:([\s\S]*)\<!--Dangerous-->").ToString();
+            a = a.Replace("<!--Dangerous-->", "");
+            a = a.Replace("<p>", "");
+            a = a.Replace("</p>", "");
+            a = a.Replace("<br/>", "");
+            a = a.Replace("&nbsp;", "  ");
+            MessageBox.Show(a);
+
         }
     }
 }
